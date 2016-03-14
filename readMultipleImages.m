@@ -46,6 +46,7 @@ for pair = reshape(varargin,2,[]) %# pair is {propName;propValue}
             if strcmp(pair{2},'on')
                 for i=1:length(files)
                     temp=imread(files(i).name);
+%                     temp=rgb2lab(temp);
                     matIm{i}=temp;
                     matIm{i+length(files)}=fliplr(temp);
                 end
@@ -110,4 +111,5 @@ for pair = reshape(varargin,2,[]) %# pair is {propName;propValue}
     else
         error('%s is not a recognized parameter name',inpName)
     end
+    
 end
