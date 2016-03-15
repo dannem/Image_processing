@@ -47,11 +47,15 @@ for i=1:size(names_fam,2)/2
     facesPro=faces(ind,:);
     faces(ind,:)=[];
     [reconMat,projMat,statMat]=rec_proj_PCA(faces,facesPro(1,:));
-    stat.hap_lab_all_4out(i)=statMat.dist;
+    a=lab2rgb(reshape(projMat',size(projMat,2)/3,3))*255;
+    b=lab2rgb(reshape(facesPro(1,:)',size(projMat,2)/3,3))*255;
+    stat.hap_lab_all_4out(i)=sqrt(sum((a(:) - b(:)) .^ 2));
     imagesProj=mat2ims(projMat',ell_templ,1,names_fam(1+(i-1)*2),dirc,'hap_lab_all_4out',1);
     [reconMat,projMat,statMat]=rec_proj_PCA(faces,facesPro(2,:));
+    a=lab2rgb(reshape(projMat',size(projMat,2)/3,3))*255;
+    b=lab2rgb(reshape(facesPro(2,:)',size(projMat,2)/3,3))*255;
     imagesProj=mat2ims(projMat',ell_templ,1,names_fam(2+(i-1)*2),dirc,'neut_lab_all_4out',1);
-    stat.neut_lab_all_4out(i)=statMat.dist;
+    stat.neut_lab_all_4out(i)=sqrt(sum((a(:) - b(:)) .^ 2));
     i
     toc
     
@@ -109,7 +113,9 @@ for i=1:size(names_fam,2)/2
     facesPro=faces(ind,:);
     faces(ind,:)=[];
     [reconMat,projMat,statMat]=rec_proj_PCA(faces,facesPro(1,:));
-    stat.hap_lab_all_2out(i)=statMat.dist;
+    a=lab2rgb(reshape(projMat',size(projMat,2)/3,3))*255;
+    b=lab2rgb(reshape(facesPro(1,:)',size(projMat,2)/3,3))*255;
+    stat.hap_lab_all_2out(i)=sqrt(sum((a(:) - b(:)) .^ 2));
     imagesProj=mat2ims(projMat',ell_templ,1,names_fam(1+(i-1)*2),dirc,'hap_lab_all_2out',1);
     
     faces=faces_all;
@@ -117,8 +123,10 @@ for i=1:size(names_fam,2)/2
     facesPro=faces(ind,:);
     faces(ind,:)=[];
     [reconMat,projMat,statMat]=rec_proj_PCA(faces,facesPro(1,:));
+    a=lab2rgb(reshape(projMat',size(projMat,2)/3,3))*255;
+    b=lab2rgb(reshape(facesPro(1,:)',size(projMat,2)/3,3))*255;
     imagesProj=mat2ims(projMat',ell_templ,1,names_fam(2+(i-1)*2),dirc,'neut_lab_all_2out',1);
-    stat.neut_lab_all_2out(i)=statMat.dist;
+    stat.neut_lab_all_2out(i)=sqrt(sum((a(:) - b(:)) .^ 2));
     i
     toc
     
@@ -193,7 +201,9 @@ for i=1:size(names_fam,2)/2
     facesPro=faces(ind,:);
     faces(ind,:)=[];
     [reconMat,projMat,statMat]=rec_proj_PCA(faces,facesPro(1,:));
-    stat.neut_lab(i)=statMat.dist;
+    a=lab2rgb(reshape(projMat',size(projMat,2)/3,3))*255;
+    b=lab2rgb(reshape(facesPro(1,:)',size(projMat,2)/3,3))*255;
+    stat.neut_lab(i)=sqrt(sum((a(:) - b(:)) .^ 2));
     imagesProj=mat2ims(projMat',ell_templ,1,names_fam(1+(i-1)*2),dirc,'neut_lab',1);
     i
     toc
@@ -218,7 +228,9 @@ for i=1:size(names_fam,2)/2
     facesPro=faces(ind,:);
     faces(ind,:)=[];
     [reconMat,projMat,statMat]=rec_proj_PCA(faces,facesPro(1,:));
-    stat.hap_lab(i)=statMat.dist;
+    a=lab2rgb(reshape(projMat',size(projMat,2)/3,3))*255;
+    b=lab2rgb(reshape(facesPro(1,:)',size(projMat,2)/3,3))*255;
+    stat.hap_lab(i)=sqrt(sum((a(:) - b(:)) .^ 2));
     imagesProj=mat2ims(projMat',ell_templ,1,names_fam(1+(i-1)*2),dirc,'hap_lab',1);
     i
     toc
