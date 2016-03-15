@@ -1,4 +1,4 @@
-function output=readMultipleImages(dirc,fileFormat,bck,varargin)
+function [output,names]=ims2mat(dirc,fileFormat,bck,varargin)
 %readMultipleImages converts files of desingated type into matrices. In
 %   addition it can add flipped images to augment the sample and convert
 %   images to LAB format.
@@ -26,6 +26,7 @@ options = struct('Format',{formatVal},'Flip',{flipVal},'Convert',{convertVal});
 % loading files
 for i=1:length(files)
     fileMat{i}=imread(files(i).name);
+    names{i}=files(i).name;
 end
 fileMat=fileMat';
 %# count arguments
