@@ -1,6 +1,8 @@
+%% this script projects PCA-corrected famous images on the original famous faces space
+load('/Users/dannem/Documents/Reconstruction/Image_Preparation/Projection of PCA faces on original famous/matlab.mat')
 Z=NaN(59,59,20);
 Y_proj=[];
-[Wold, Yold] = cmdscale(conf_orig);
+[Wold, Yold] = cmdscale(conf_orig); % msd of the ogirinal sapce
 Wold=Wold(:,1:20);
 ims=[];
 for j=1:59
@@ -28,8 +30,6 @@ for j=1:59
     Wnew_temp=Wnew(1:size(Wnew,1)-1,1:20);
     [d,Z(j,:,:),tf] = procrustes(Wold,Wnew_temp);
     Y_proj(j,:,:) = tf.b*Wnew(:,1:20)*tf.T + repmat(tf.c(1,:), 60, 1);
-    j
-   
 end
 temp=squeeze(Y_proj(1,:,:));
 Wpca=squeeze(Y_proj(:,60,:));
