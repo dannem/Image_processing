@@ -253,7 +253,6 @@ sound(S(2).y,S(2).Fs)
 % subplot(1,2,2)
 % imshow(uint8(imageTrue))
 % end
-load('/Users/dannem/Dropbox/CompNeuroLab/EEG Reconstruction/Stimuli/bck.mat')
 dirc='/Users/dannem/Dropbox/CompNeuroLab/EEG Reconstruction/Stimuli/Memory/old_stimuli';
 [faces_ufr1,names_ufr1]=ims2mat(dirc,'tif',ell_templ,'flip','on','format','double2D','Convert','off');
 dirc='/Users/dannem/Dropbox/CompNeuroLab/EEG Reconstruction/Stimuli/Memory/new_stimuli';
@@ -270,8 +269,10 @@ for i=1:size(names_ufr3,2)
     [reconMat,projMat,statMat]=rec_proj_PCA(faces,faces_ufr3(:,i)');
     stat.ims(i)=statMat.dist;
     imagesProj=mat2ims(projMat',ell_templ,1,names_ufr3(i),dirc_target,'projected');
+    i
+    toc
+    
 end
-toc
 disp('End of process');
 S(2) = load('handel');
 sound(S(2).y,S(2).Fs)
