@@ -1,4 +1,5 @@
 function build_face_space_proto(ims,conf,ndims)
+%% built for Hassan
 if length(ims)~=length(conf)
     error('The number of identities in confusability matrix and number of images are inconsitent');
 elseif nargin<3
