@@ -48,7 +48,7 @@ elseif round(nArgs/2)~=nArgs/2
     error('EXAMPLE needs propertyName/propertyValue pairs')
 else
     % creating vector with pairs of method names
-    args=lower(reshape(varargin,2,3))';
+    args=lower(reshape(varargin,1,2));
     % checking Convert
     checkVar=lower('Convert');
     if any(any(strcmp(args,checkVar)))

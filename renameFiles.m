@@ -1,4 +1,5 @@
 function renameFiles(dirc,fileFormat,nameNew,sort)
+% ex: renameFiles(dirc,'tif','unfam',1)
 cd(dirc)
 files=dir(['*.' fileFormat]);
 imNum=size(files,1);
