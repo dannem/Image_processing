@@ -1,4 +1,4 @@
-function output=readMultipleImages(dirc,fileFormat,bck,varargin)
+function [output,names]=readMultipleImages(dirc,fileFormat,bck,varargin)
 %readMultipleImages converts files of desingated type into matrices. In
 %   addition it can add flipped images to augment the sample and convert
 %   images to LAB format.
@@ -12,6 +12,7 @@ function output=readMultipleImages(dirc,fileFormat,bck,varargin)
 %   Function is written by DN for VisRecLab
 cd(dirc)
 files=dir(['*.' fileFormat]);
+
 %# define defaults at the beginning of the code so that you do not need to
 %# scroll way down in case you want to change something or if the help is
 %# incomplete
@@ -26,7 +27,9 @@ options = struct('Format',{formatVal},'Flip',{flipVal},'Convert',{convertVal});
 % loading files
 for i=1:length(files)
     fileMat{i}=imread(files(i).name);
+    names{i}=files(i).name;
 end
+names=names';
 fileMat=fileMat';
 %# count arguments
 nArgs = length(varargin);

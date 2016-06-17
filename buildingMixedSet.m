@@ -51,15 +51,16 @@ for i=1:length(ind_Lab_fam)
     [~,ind_L_unf(i)]=min(temp);
 end
 clear temp
+it=[26 46 28 8 29 32];
 
-ims_mixed_Lab=cell(120,1);
-ims_mixed_L=cell(120,1);
-ims_mixed_Lab([1:54 61:114])=ims_unf;
-ims_mixed_L([1:54 61:114])=ims_unf;
-ims_mixed_Lab([55:60])=ims_fam(ind_Lab_fam);
-ims_mixed_L([55:60])=ims_fam(ind_L_fam);
-ims_mixed_Lab([115:120])=ims_fam(ind_Lab_fam+59);
-ims_mixed_L([115:120])=ims_fam(ind_L_fam+59);
+ims_mixed=cell(120,1);
+
+ims_mixed([1:54 61:114])=ims_unf;
+
+ims_mixed([55:60])=ims_famous(it);
+
+ims_mixed([115:120])=ims_famous(it+93);
+
 
 %computing confusibility matrix for Lab
 ims=ims_mixed_Lab;
@@ -110,7 +111,7 @@ clear outputVal vecInd b b1 b2 a a1 a2 maxVal ims conf i
 
 %% plotting images
 figure
-for i=1:length(ind_Lab_fam)
+for i=1:length(i)
     subplot(2,6,i)
     imshow(ims_fam{ind_Lab_fam(i)})
     subplot(2,6,i+6)
