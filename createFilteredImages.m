@@ -1,10 +1,10 @@
-function createFilteredImages(dircIn,cps,ell_templ,fileFormat,dircOut)
-if nargin<5
+function createFilteredImages(dircIn,cps,ell_templ,fileFormat,factor,dircOut)
+if nargin<6
     dircOut='/Filtered Images';
 end
 
 % creating smaller background
-ell=imresize(ell_templ, 0.55,'bilinear');
+ell=imresize(ell_templ, factor,'bilinear');
 
 ell1=fliplr(ell);
 ell=(ell+ell1)/2;
@@ -12,7 +12,7 @@ ell=ell>0.5;
 ell1=flipud(ell);
 ell=(ell+ell1)/2;
 % ell=round(ell);
-ell=ell>0.5;
+ell=ell>0.2;
 ell=logical(ell);
 ell=repmat(ell,1,1,3);
 
@@ -26,14 +26,15 @@ for i=1:length(ims)
     temp=ims{i};
     temp=rgb2lab(temp);
     sz_im=size(ell_templ);
-    temp(logical(cat(3,~ell_templ,zeros([sz_im 2]))))=mean(temp(logical(cat(3,ell_templ,zeros([sz_im 2])))));
-    temp(logical(cat(3,zeros(sz_im),~ell_templ,zeros(sz_im))))=mean(temp(logical(cat(3,zeros(sz_im),ell_templ,zeros(sz_im)))));
-    temp(logical(cat(3,zeros([sz_im 2]),~ell_templ)))=mean(temp(logical(cat(3,zeros([sz_im 2]),ell_templ))));
+    temp(logical(cat(3,ell_templ,zeros([sz_im 2]))))=mean(temp(logical(cat(3,~ell_templ,zeros([sz_im 2])))));
+    temp(logical(cat(3,zeros(sz_im),ell_templ,zeros(sz_im))))=mean(temp(logical(cat(3,zeros(sz_im),~ell_templ,zeros(sz_im)))));
+    temp(logical(cat(3,zeros([sz_im 2]),ell_templ)))=mean(temp(logical(cat(3,zeros([sz_im 2]),~ell_templ))));
     temp=filtperform(temp,cps);
-    temp=imresize(temp, 0.55,'bilinear');
-    temp(ell==0)=0;
+    temp=imresize(temp, factor,'bilinear');
+    temp(ell==1)=0;
     temp=lab2rgb(temp);
-    imwrite(temp,[dircOut '/Filt_' files(i).name],'tif');
+    imwrite(temp,[dircOut '/Filt_' files(i).name(1,1:end-4) '.tif'],'tif');
+    
     
 end
 save('bck.mat','ell')
